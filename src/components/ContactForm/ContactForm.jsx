@@ -4,15 +4,21 @@ import { useId, useState } from "react";
 
 import { nanoid } from 'nanoid'
 import css from "./contactForm.module.css"
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactSlice";
 
-const ContactForm = ({onAdd}) => {
-
+const ContactForm = () => {
+  
+  const dispatch = useDispatch();
+const addContacts = (newContact) => {
+ dispatch(addContact(newContact))
+  }
 const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
   const handleSubmit = (event) => {
           event.preventDefault();
-        onAdd({
+        addContacts({
             id: nanoid(),
             name: name,
                 number: number
